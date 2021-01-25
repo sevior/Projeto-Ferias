@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const Usuario = require("./src/model/usuarioModel");
+const Receita = require("./src/model/receitaModel");
 
 const app = express();
 
@@ -13,8 +14,10 @@ mongoose.Promise = global.Promise;
 mongoose.connect("mongodb://localhost/ProjetoFeriasDB", {useNewUrlParser: true, useUnifiedTopology: true})
 
 const routes = require("./src/router/usuarioRoute");
+const routesReceita = require("./src/router/receitaRoute");
 
 routes(app);
+routesReceita(app);
 
 app.route("/").get((req,res) =>{
     res.send("Bem vindo(a) ao Projeto de Férias!")
