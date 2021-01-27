@@ -2,6 +2,10 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const ReceitaSchema = new Schema({
+    nomeReceita: {
+        type: String,
+        require: true
+    },
     tempoPreparo: {
         type: String,
         require: true

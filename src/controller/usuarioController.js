@@ -46,6 +46,24 @@ exports.showOne = (req,res) => {
     })
 }
 
+// Login do Usuário
+exports.login = async (req,res) => {
+    const usuario = await Usuario.findOne({
+        email: req.body.email,
+        senha: req.body.senha,
+      });
+    
+      console.log(req.body.email + " - " + req.body.senha);
+    
+      if (usuario !== null) {
+        console.log("Login efetuado com Sucesso!");
+        res.json(usuario);
+      } else {
+        console.log("Erro ao efetuar Login!");
+        res.status(404);
+      }
+}
+
 //Atualiza dados de um Usuário
 exports.update = (req,res) =>{
     Usuario.findOneAndUpdate({_id: req.params.id}, req.body,{new: true}, (error,usuario) =>{

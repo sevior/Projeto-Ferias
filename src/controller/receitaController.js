@@ -3,8 +3,8 @@ const Receita = mongoose.model("Receitas");
 
 //Cadastrar um nova Receita
 exports.createOne = (req,res) =>{
-    const {tempoPreparo, rendimento, ingredientes, modoPreparo} = req.body;
-    const novaReceita = new Receita({tempoPreparo, rendimento, ingredientes, modoPreparo});
+    const {nomeReceita, tempoPreparo, rendimento, ingredientes, modoPreparo} = req.body;
+    const novaReceita = new Receita({nomeReceita, tempoPreparo, rendimento, ingredientes, modoPreparo});
   
     novaReceita.save((error, receita) =>{
         if(error){
