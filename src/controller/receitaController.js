@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Receita = mongoose.model("Receitas");
+const ObjectId = require('mongodb').ObjectID;
 
 //Cadastrar um nova Receita
 exports.createOne = (req,res) =>{
@@ -23,12 +24,8 @@ exports.listAll = (req,res) =>{
     Receita.find({},(error, receitas) =>{
         if(error){
             res.send("Erro ao listar as Receitas! "+error)
-        }
-        const response = {
-            message: "Receitas listadas com sucesso!",
-            data: receitas
-        };
-        res.json(response);
+        }      
+        res.json(receitas);
     })
 }
 
@@ -62,14 +59,15 @@ exports.update = (req,res) =>{
 
 //Deleta uma Receita do banco de dados
 exports.delete = (req,res) =>{
-    Receita.remove({_id: req.params.id}, (error, receita) =>{
+    Receita.findOneAndDelete({_id: req.params.id}, (error) =>{
         if(error){
             res.send("Erro ao deletar a receita "+error)
         }
         const response = {
             message: "Receita deletada com sucesso!",
-            data: receita
+            
         };
         res.json(response);
     })
+    
 }
